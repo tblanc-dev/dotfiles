@@ -1,0 +1,7 @@
+# Never track machine-local or secret overrides
+*.local
+.zshrc.local
+
+# OS / editor noise
+.DS_Store
+*.swp
