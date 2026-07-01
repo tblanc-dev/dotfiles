@@ -23,6 +23,10 @@ link ".wezterm.lua"
 link ".tmux.conf"
 link ".config/nvim"
 
+mkdir -p "$HOME/.claude/skills"
+ln -sfn "$DOTFILES/.claude/skills/dotfiles" "$HOME/.claude/skills/dotfiles"
+echo "linked ~/.claude/skills/dotfiles"
+
 echo
 echo "Done. Put any machine-local/company/secret settings in ~/.zshrc.local"
 echo "(it is sourced by .zshrc but never tracked)."
