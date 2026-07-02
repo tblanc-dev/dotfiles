@@ -1,6 +1,16 @@
 autoload -Uz compinit
 compinit
 
+# ── Line editing: match the escape sequences WezTerm sends ───────────
+# Cmd+Left / Cmd+Right  -> start / end of line   (Home / End)
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+bindkey '^[[1~' beginning-of-line   # Home variant (some tmux/term setups)
+bindkey '^[[4~' end-of-line         # End variant
+# Option+Left / Option+Right -> previous / next word  (Ctrl-Left / Ctrl-Right)
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
+
 # ── Go ───────────────────────────────────────────────────────────────
 export GOPROXY=https://proxy.golang.org,direct
 export PATH=$HOME/.local/bin:$PATH
