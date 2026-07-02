@@ -27,6 +27,13 @@ config.window_background_opacity = 0.9
 config.send_composed_key_when_left_alt_is_pressed = true
 config.send_composed_key_when_right_alt_is_pressed = true
 
+-- Make mouse text selection clearly visible (rose-pine-moon's default is faint).
+-- Overrides just these two entries on top of the color_scheme.
+config.colors = {
+  selection_bg = "#c4a7e7", -- iris (matches the active pane border)
+  selection_fg = "#232136", -- base (dark text on the bright selection)
+}
+
 local act = wezterm.action
 
 config.keys = {
