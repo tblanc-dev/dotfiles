@@ -40,6 +40,9 @@ config.keys = {
   -- Cmd+Shift+F toggles full screen
   { key = 'F', mods = 'CMD|SHIFT', action = act.ToggleFullScreen },
 
+  -- Cmd+W closes the tab without the confirmation prompt.
+  { key = 'w', mods = 'CMD', action = act.CloseCurrentTab { confirm = false } },
+
   -- Shift+Enter => insert a newline instead of submitting.
   -- By default Shift+Enter sends the same \r as Enter, so apps can't tell
   -- them apart. Send ESC+CR (\x1b\r), which multi-line TUIs (Claude Code,
