@@ -73,6 +73,11 @@ config.keys = {
   -- Cmd + Delete (Backspace) => delete to start of line
   -- Emits Ctrl-U (kill line back), handled natively by nvim and the shell.
   { key = 'Backspace', mods = 'CMD', action = act.SendString '\x15' },
+
+  -- Option+N => emit ~ in a single press.
+  -- On the French Mac layout Option+N is a dead key (˜) that waits for a
+  -- second keystroke. Bind it directly so one press yields a literal tilde.
+  { key = 'n', mods = 'OPT', action = act.SendString '~' },
 }
 
 -- Cmd+Click opens links. Because tmux has `mouse on`, plain clicks are
@@ -91,6 +96,17 @@ config.mouse_bindings = {
     mods = 'SUPER',
     action = act.Nop,
     mouse_reporting = true,
+  },
+  -- Finer scrollback: 1 line per wheel tick (default jumps several).
+  {
+    event = { Down = { streak = 1, button = { WheelUp = 1 } } },
+    mods = 'NONE',
+    action = act.ScrollByLine(-1),
+  },
+  {
+    event = { Down = { streak = 1, button = { WheelDown = 1 } } },
+    mods = 'NONE',
+    action = act.ScrollByLine(1),
   },
 }
 

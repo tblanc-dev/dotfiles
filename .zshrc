@@ -29,6 +29,7 @@ alias gitlg='git log --oneline --decorate --graph --all' # Pretty log history
 alias gitp='git push'                         # Push to remote
 alias gitpf='git push --force-with-lease'     # Safe force push
 alias gitpl='git pull'                         # Pull from remote
+alias gitl='git pull'                          # Pull from remote (short)
 alias gitrh='git reset HEAD'                  # Unstage changes (soft reset)
 alias gitcb='git checkout -b'                 # Create and switch to a new branch
 alias gitdm='git branch -d'                   # Delete a local branch
@@ -36,6 +37,7 @@ alias gitDR='git branch --merged | egrep -v "(^\*|master|main|dev)" | xargs git 
 alias gitpr='git pull --rebase'               # Pull and rebase instead of merge
 
 # ── GitHub CLI (gh) aliases ──────────────────────────────────────────
+brew upgrade gh
 alias ghp='gh pr create --web'              # Create a standard PR, opening in the browser for details
 alias ghpd='gh pr create --draft --fill'    # Create a Draft PR, filling title/body from git commit messages
 
