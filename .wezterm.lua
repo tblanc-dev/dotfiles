@@ -47,12 +47,19 @@ config.keys = {
   { key = 'Enter', mods = 'SHIFT', action = act.SendString '\x1b\r' },
 
   -- Cmd+K clears the terminal (like macOS Terminal / iTerm).
-  -- Clears WezTerm's scrollback + viewport, then sends Ctrl-L so the shell
-  -- (incl. inside tmux) redraws a fresh prompt at the top.
-  { key = 'k', mods = 'CMD', action = act.Multiple {
-    act.ClearScrollback 'ScrollbackAndViewport',
-    act.SendString '\x0c',
-  } },
+  -- Inside tmux, WezTerm's ClearScrollback would wipe the whole composited
+  -- grid (every pane), so instead send prefix+C-l to let tmux clear only the
+  -- active pane (see the matching `bind C-l` in .tmux.conf). Outside tmux,
+  -- clear WezTerm's scrollback + viewport and Ctrl-L for a fresh prompt.
+  { key = 'k', mods = 'CMD', action = wezterm.action_callback(function(window, pane)
+    local proc = pane:get_foreground_process_name() or ''
+    if proc:find('tmux') then
+      window:perform_action(act.SendString '\x02\x0c', pane) -- C-b then C-l
+    else
+      window:perform_action(act.ClearScrollback 'ScrollbackAndViewport', pane)
+      window:perform_action(act.SendString '\x0c', pane)
+    end
+  end) },
 
   -- Option + Left/Right => jump word-by-word
   -- Emits the Ctrl+Left/Right sequences, which nvim maps to word motion (b / w)
